@@ -1,0 +1,39 @@
+import socket
+
+# Creating a socket type object python. I named it "my_socket"
+# This function that creates the socket gets the parameters socket.AF_INET. It means using an IP protocol
+# and socket.SOCK_STREAM which means using TCP Protocol
+my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Connecting to the IP (127.0.0.1) of the server and to port number 8820
+my_socket.connect(("127.0.0.1", 8820))
+
+# Sending a question to the server
+my_socket.send("What is the subnet mask of 110.40.240.16/22?".encode())
+
+# Receiving an answer from the server
+SubnetMaskAnswerOfServer = my_socket.recv(1024).decode()
+
+# Printing the answer of the client
+print("The server sent: " + SubnetMaskAnswerOfServer)
+
+# Sending a question to the server
+my_socket.send("What is the Network Address of 110.40.240.16/22?".encode())
+
+# Receiving an answer from the server
+NetworkAddressAnswerOfServer = my_socket.recv(1024).decode()
+
+# Printing the answer of the client
+print("The server sent: " + NetworkAddressAnswerOfServer)
+
+# Sending a question to the server
+my_socket.send("What is the Broadcast Address of 110.40.240.16/22?".encode())
+
+# Receiving an answer from the server
+BroadcastAddressAnswerOfServer = my_socket.recv(1024).decode()
+
+# Printing the answer of the client
+print("The server sent: " + BroadcastAddressAnswerOfServer)
+
+# Closing the socket of the client
+my_socket.close()
