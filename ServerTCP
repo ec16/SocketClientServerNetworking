@@ -1,0 +1,54 @@
+import socket
+
+# Creating a socket type object python. I named it "server_socket"
+# I added the parameters socket.AF_INET. It means using an IP protocol
+# and socket.SOCK_STREAM which means using TCP Protocol
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Binding between the IP and the port
+server_socket.bind(("0.0.0.0", 8820))
+
+# Listening to a connection from the client
+server_socket.listen()
+
+# Printing that the server is ready
+print("Server is up and running")
+
+# Accepting requests from the client
+(client_socket, client_address) = server_socket.accept()
+
+# Printing that the client is connected
+print("Client connected")
+
+# Receiving the question of client
+SubnetMaskQuestionOfClient = client_socket.recv(1024).decode()
+
+# Sending an answer to the client
+client_socket.send("The subnet mask of 110.40.240.16/22 is 255.255.252.0".encode())
+
+# Printing the question of the client
+print("Client sent: " + SubnetMaskQuestionOfClient)
+
+# Receiving the question of client
+NetworkAddressQuestionOfClient = client_socket.recv(1024).decode()
+
+# Sending an answer to the client
+client_socket.send("The Network Address of 110.40.240.16/22 is 110.40.240.0".encode())
+
+# Printing the question of the client
+print("Client sent: " + NetworkAddressQuestionOfClient)
+
+# Receiving the question of client
+BroadcastAddressQuestionOfClient = client_socket.recv(1024).decode()
+
+# Sending an answer to the client
+client_socket.send("The Broadcast Address of 110.40.240.16/22 is 110.40.243.255".encode())
+
+# Printing the question of the client
+print("Client sent: " + BroadcastAddressQuestionOfClient)
+
+# Closing the socket of the client
+client_socket.close()
+
+# Closing the socket of the server
+server_socket.close()
